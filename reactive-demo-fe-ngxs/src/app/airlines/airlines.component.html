@@ -1,0 +1,9 @@
+<mat-form-field>
+  <mat-select placeholder="Country" #country value="Netherlands">
+    <mat-option *ngFor="let c of countries" [value]="c">
+      {{ c }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<demo-airlines-list [country]="country.value"></demo-airlines-list>
