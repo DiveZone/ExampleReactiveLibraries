@@ -198,6 +198,24 @@
     tree-kill "^1.0.0"
     webpack-sources "^1.1.0"
 
+"@ngxs/devtools-plugin@^3.0.0-rc.1":
+  version "3.0.0-rc.1"
+  resolved "https://registry.yarnpkg.com/@ngxs/devtools-plugin/-/devtools-plugin-3.0.0-rc.1.tgz#6e1e9339e7496c5511a0be5a7944987a4b93ad63"
+  dependencies:
+    tslib "^1.9.0"
+
+"@ngxs/logger-plugin@^3.0.0-rc.1":
+  version "3.0.0-rc.1"
+  resolved "https://registry.yarnpkg.com/@ngxs/logger-plugin/-/logger-plugin-3.0.0-rc.1.tgz#d7057c28bd78dc06432589f0264021717f616670"
+  dependencies:
+    tslib "^1.9.0"
+
+"@ngxs/store@^3.0.0-rc.1":
+  version "3.0.0-rc.1"
+  resolved "https://registry.yarnpkg.com/@ngxs/store/-/store-3.0.0-rc.1.tgz#e5c21e02b657e409cf4d24475792bca983cd51c7"
+  dependencies:
+    tslib "^1.9.0"
+
 "@schematics/angular@0.3.2":
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-0.3.2.tgz#be209a032a3e4577992d94fbaa14bd4bfde485e2"
@@ -5550,6 +5568,12 @@ rxjs@^5.5.6:
   dependencies:
     symbol-observable "1.0.1"
 
+rxjs@rxjs@5.6.0-forward.compat.1:
+  version "5.6.0-forward-compat.4"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.6.0-forward-compat.4.tgz#1d3d8d0ebd7eb894a44891d2582f604a78b0014c"
+  dependencies:
+    symbol-observable "1.0.1"
+
 safe-buffer@5.1.1, safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
@@ -6462,7 +6486,7 @@ tsickle@^0.27.2:
     source-map "^0.6.0"
     source-map-support "^0.5.0"
 
-tslib@^1.7.1, tslib@^1.8.0, tslib@^1.8.1:
+tslib@^1.7.1, tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.0.tgz#e37a86fda8cbbaf23a057f473c9f4dc64e5fc2e8"
 

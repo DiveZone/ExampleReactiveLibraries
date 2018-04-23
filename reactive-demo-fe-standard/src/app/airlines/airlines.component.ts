@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
 })
 export class AirlinesComponent {
 
-  countries = ['Brazil', 'India', 'Mexico', 'Netherlands'];
+  countries = ['Brazil', 'India', 'Mexico', 'Netherlands', 'Spain'];
 
 }

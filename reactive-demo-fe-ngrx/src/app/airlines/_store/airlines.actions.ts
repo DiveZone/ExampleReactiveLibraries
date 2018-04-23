@@ -4,8 +4,8 @@ import { Airline } from './airlines.model';
 export const QUERY = '[Airlines] query';
 export const LOADED = '[Airlines] loaded';
 
-export const FAVORIZE = '[FlightLeg] favorize';
-export const FAVORIZED = '[FlightLeg] favorized';
+export const FAVORIZE = '[Airlines] favorize';
+export const FAVORIZED = '[Airlines] favorized';
 
 export class Query implements Action {
   readonly type = QUERY;

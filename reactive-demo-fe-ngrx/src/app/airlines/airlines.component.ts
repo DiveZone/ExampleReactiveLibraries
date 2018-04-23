@@ -7,7 +7,7 @@ import { AirlinesService } from './_store/airlines.service';
 })
 export class AirlinesComponent {
 
-  countries = ['Brazil', 'India', 'Mexico', 'Netherlands'];
+  countries = ['Brazil', 'India', 'Mexico', 'Netherlands', 'Spain'];
 
   private _country = 'Netherlands';
 

@@ -17,7 +17,6 @@ export function airlinesReducer(state: State = initialState,
     case actions.LOADED:
       return airlinesAdapter.addAll((action as Loaded).payload, state);
     case actions.FAVORIZED:
-      console.log(action.payload);
       return airlinesAdapter.updateOne({id: (action as Favorized).payload.id, changes: action.payload}, state);
     default:
       return state;

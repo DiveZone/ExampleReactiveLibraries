@@ -35,7 +35,6 @@ export class AirlinesListComponent implements AfterViewInit, OnDestroy {
   }
 
   updateFavorite(id: number, favorite: boolean) {
-    console.log(id, favorite);
     this._service.setFavorite(id, favorite);
   }
 }

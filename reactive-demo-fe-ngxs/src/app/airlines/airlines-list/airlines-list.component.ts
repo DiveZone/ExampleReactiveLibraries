@@ -1,63 +1,47 @@
-import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
-import { take, takeUntil } from 'rxjs/operators';
+import { Select, Store } from '@ngxs/store';
+import { Favorize } from 'app/airlines/_store/airlines.actions';
+import { Observable } from 'rxjs/Observable';
+import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
-import { Airline } from '../airlines.model';
-import { AirlinesService } from '../airlines.service';
+import { Airline } from '../_store/airlines.model';
 
 @Component({
-  selector: 'demo-airlines-list',
-  templateUrl: './airlines-list.component.html'
+    selector: 'demo-airlines-list',
+    templateUrl: './airlines-list.component.html'
 })
-export class AirlinesListComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
+export class AirlinesListComponent implements AfterViewInit, OnDestroy {
 
-  displayedColumns = ['favorite', 'id', 'name', 'iata', 'icao', 'callsign'];
+    displayedColumns = ['favorite', 'id', 'name', 'iata', 'icao', 'callsign'];
 
-  dataSource: MatTableDataSource<Airline> = new MatTableDataSource<Airline>();
+    dataSource: MatTableDataSource<Airline> = new MatTableDataSource<Airline>();
 
-  @Input() country: string;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+    private disconnect$ = new Subject();
 
-  private disconnect$ = new Subject();
+    @Select() airlines$: Observable<Airline[]>;
 
-  constructor(private _service: AirlinesService) {
-  }
+    constructor(private _store: Store) {
+        this.airlines$
+            .pipe(takeUntil(this.disconnect$))
+            .subscribe(data => this.dataSource.data = data);
+    }
 
-  ngOnInit() {
-    this.updateList();
-  }
+    ngAfterViewInit() {
+        this.dataSource.paginator = this.paginator;
+    }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
+    ngOnDestroy() {
+        this.disconnect$.next();
+        this.disconnect$.complete();
+    }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.disconnect$.next();
-    this.updateList();
-  }
-
-  ngOnDestroy() {
-    this.disconnect$.next();
-    this.disconnect$.complete();
-  }
-
-  private updateList() {
-    this._service.getAirlineList(this.country)
-      .pipe(takeUntil(this.disconnect$))
-      .subscribe(
-        airlines => {
-          this.dataSource.data = airlines;
-        },
-        () => {
-          this.dataSource.data = [];
-        }
-      );
-  }
-
-  updateFavorite(id: number, favorite: boolean) {
-    this._service.setFavorite(id, favorite).pipe(
-      take(1)
-    ).subscribe();
-  }
+    updateFavorite(id: number, favorite: boolean) {
+        this._store.dispatch(new Favorize({
+            id: id,
+            favorite: favorite
+        }));
+    }
 }
