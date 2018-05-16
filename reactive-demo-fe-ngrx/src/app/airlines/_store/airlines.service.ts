@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Favorize, Query } from './airlines.actions';
 import { Airline } from './airlines.model';
 
 import * as fromAirline from './airlines.reducer';
-import * as airlineActions from './airlines.actions';
 
 @Injectable()
 export class AirlinesService {
@@ -14,11 +14,11 @@ export class AirlinesService {
   }
 
   query(country: string) {
-    this._store.dispatch(new airlineActions.Query(country));
+    this._store.dispatch(new Query(country));
   }
 
   setFavorite(id: number, favorite: boolean) {
-    this._store.dispatch(new airlineActions.Favorize({
+    this._store.dispatch(new Favorize({
       id: id,
       favorite: favorite
     }));

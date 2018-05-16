@@ -1,7 +1,6 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { createFeatureSelector } from '@ngrx/store';
-import { Favorized, Loaded } from './airlines.actions';
-import * as actions from './airlines.actions';
+import { AirlineActions, AirlineActionTypes, Favorized, Loaded } from './airlines.actions';
 import { Airline } from './airlines.model';
 
 export const airlinesAdapter = createEntityAdapter<Airline>();
@@ -12,11 +11,11 @@ export interface State extends EntityState<Airline> {
 export const initialState: State = airlinesAdapter.getInitialState();
 
 export function airlinesReducer(state: State = initialState,
-                                action: actions.AirlinesActions) {
+                                action: AirlineActions) {
   switch (action.type) {
-    case actions.LOADED:
+    case AirlineActionTypes.LOADED:
       return airlinesAdapter.addAll((action as Loaded).payload, state);
-    case actions.FAVORIZED:
+    case AirlineActionTypes.FAVORIZED:
       return airlinesAdapter.updateOne({id: (action as Favorized).payload.id, changes: action.payload}, state);
     default:
       return state;
