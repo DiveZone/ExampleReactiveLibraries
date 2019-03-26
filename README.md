@@ -1,2 +1,5 @@
 # ExampleReactiveLibraries
-3 Simple samples of consuming a REST service in Angular, standard, with NgRX or NgXS.
+Simple Front-end samples of consuming a REST service, 
+- Angular (ng) 
+- Angular with NgRX
+- Angular with NgXS
