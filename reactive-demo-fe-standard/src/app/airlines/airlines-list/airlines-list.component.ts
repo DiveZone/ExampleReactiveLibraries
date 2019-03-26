@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { take, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import { Airline } from '../airlines.model';
 import { AirlinesService } from '../airlines.service';
 
@@ -58,6 +58,6 @@ export class AirlinesListComponent implements OnInit, AfterViewInit, OnDestroy, 
   updateFavorite(id: number, favorite: boolean) {
     this._service.setFavorite(id, favorite).pipe(
       take(1)
-    ).subscribe();
+    ).subscribe(next => this.updateList());
   }
 }
