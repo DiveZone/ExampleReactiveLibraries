@@ -32,7 +32,7 @@ public class Setup {
     @PostConstruct
     private void loadData() {
         try (
-                final InputStream is = new URL("https://raw.githubusercontent.com/jpatokal/openflights/master/data/airlines.dat")
+                final InputStream is = new URL("https://raw.githubusercontent.com/DiveZone/ExampleReactiveLibraries/master/airlines.dat")
                         .openConnection()
                         .getInputStream();
                 final BufferedReader reader = new BufferedReader(new InputStreamReader(is))
