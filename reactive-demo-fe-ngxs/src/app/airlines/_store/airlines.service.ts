@@ -1,6 +1,7 @@
+
+import {throwError as observableThrowError,  Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { catchError } from 'rxjs/operators';
 import { Airline } from './airlines.model';
 
@@ -17,7 +18,7 @@ export class AirlinesService {
         `/api/airline/${country}`
       )
       .pipe(
-        catchError((err: Response) => Observable.throw(err.json()))
+        catchError((err: Response) => observableThrowError(err.json()))
       );
   }
 

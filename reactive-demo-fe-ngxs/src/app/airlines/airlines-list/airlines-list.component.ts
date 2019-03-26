@@ -2,9 +2,8 @@ import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { Select, Store } from '@ngxs/store';
 import { Favorize } from 'app/airlines/_store/airlines.actions';
-import { Observable } from 'rxjs/Observable';
+import { Observable ,  Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs/Subject';
 import { Airline } from '../_store/airlines.model';
 
 @Component({
