@@ -8,6 +8,7 @@ import com.example.reactive.demo.model.Airline;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -21,14 +22,14 @@ public class AirlineController {
         this.repository = repository;
     }
 
-    @RequestMapping("/{country}")
+    @RequestMapping(value = "/{country}", method = RequestMethod.GET)
     public List<Airline> getForCountry(
             @PathVariable final String country
     ) {
         return repository.findAirlineByCountry(country);
     }
 
-    @RequestMapping("/{id}/{favorite}")
+    @RequestMapping(value = "/{id}/{favorite}", method = RequestMethod.GET)
     public Airline setFavorite(
             @PathVariable final Integer id,
             @PathVariable final boolean favorite
@@ -38,7 +39,7 @@ public class AirlineController {
         return repository.save(a);
     }
 
-    @RequestMapping("/")
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public List<Airline> index() {
         return repository.findAirlineByCountry("Netherlands");
     }
