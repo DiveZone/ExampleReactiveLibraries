@@ -2,14 +2,12 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {
-  MatButtonModule,
-  MatButtonToggleModule,
-  MatIconModule,
-  MatPaginatorModule,
-  MatSelectModule,
-  MatTableModule
-} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatIconModule } from '@angular/material/icon';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
 import { AirlinesEffects } from './_store/airlines.effects';
 import { AirlinesService } from './_store/airlines.service';
 import { AirlinesListComponent } from './airlines-list/airlines-list.component';
