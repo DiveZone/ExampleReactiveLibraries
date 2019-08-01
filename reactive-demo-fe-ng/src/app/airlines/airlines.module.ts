@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,7 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { AirlinesListComponent } from './airlines-list/airlines-list.component';
 import { AirlinesComponent } from './airlines.component';
-import { AirlinesService } from 'app/airlines/airlines.service';
+import { AirlinesService } from './airlines.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +21,6 @@ import { AirlinesService } from 'app/airlines/airlines.service';
     CommonModule,
     HttpClientModule,
     // MATERIAL
-    FlexLayoutModule,
     MatButtonModule,
     MatButtonToggleModule,
     MatIconModule,

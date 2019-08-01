@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,7 +12,7 @@ import { AirlinesService } from './_store/airlines.service';
 import { AirlinesListComponent } from './airlines-list/airlines-list.component';
 import { AirlinesComponent } from './airlines.component';
 import { StoreModule } from '@ngrx/store';
-import { airlinesReducer } from 'app/airlines/_store/airlines.reducer';
+import { airlinesReducer } from './_store/airlines.reducer';
 import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
@@ -26,7 +25,6 @@ import { EffectsModule } from '@ngrx/effects';
     CommonModule,
     HttpClientModule,
     // MATERIAL
-    FlexLayoutModule,
     MatButtonModule,
     MatButtonToggleModule,
     MatIconModule,

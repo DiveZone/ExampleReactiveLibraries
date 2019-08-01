@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { Select, Store } from '@ngxs/store';
 import { Favorize } from 'app/airlines/_store/airlines.actions';
 import { Observable ,  Subject } from 'rxjs';
@@ -16,7 +17,7 @@ export class AirlinesListComponent implements AfterViewInit, OnDestroy {
 
     dataSource: MatTableDataSource<Airline> = new MatTableDataSource<Airline>();
 
-    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
     private disconnect$ = new Subject();
 
