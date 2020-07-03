@@ -30,13 +30,15 @@ public class AirlineController {
     }
 
     @RequestMapping(value = "/{id}/{favorite}", method = RequestMethod.GET)
-    public Airline setFavorite(
+    public void setFavorite(
             @PathVariable final Integer id,
             @PathVariable final boolean favorite
     ) {
-        Airline a = repository.findById(id).get();
-        a.setFavorite(favorite);
-        return repository.save(a);
+        repository.findById(id).ifPresent(airline -> {
+            airline.setFavorite(favorite);
+            repository.save(airline);
+        });
+
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)

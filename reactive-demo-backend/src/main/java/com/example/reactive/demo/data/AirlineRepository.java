@@ -9,12 +9,10 @@ import org.springframework.data.repository.Repository;
 
 public interface AirlineRepository extends Repository<Airline, Integer> {
 
-    List<Airline> findAll();
-
     Optional<Airline> findById(Integer id);
 
     List<Airline> findAirlineByCountry(String country);
 
-    Airline save(Airline entity);
+    void save(Airline entity);
 
 }
