@@ -3,7 +3,6 @@ package com.example.reactive.demo.setup;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URL;
 
 import javax.annotation.PostConstruct;
 
@@ -29,26 +28,26 @@ public class Setup {
 
     @PostConstruct
     private void loadData() {
+        var bootstrapSchema = CsvSchema.builder()
+                .addColumn("id", CsvSchema.ColumnType.NUMBER)
+                .addColumn("name", CsvSchema.ColumnType.STRING)
+                .addColumn("alias", CsvSchema.ColumnType.STRING)
+                .addColumn("iata", CsvSchema.ColumnType.STRING)
+                .addColumn("icao", CsvSchema.ColumnType.STRING)
+                .addColumn("callsign", CsvSchema.ColumnType.STRING)
+                .addColumn("country", CsvSchema.ColumnType.STRING)
+                .addColumn("active", CsvSchema.ColumnType.STRING)
+                .build()
+                .withoutHeader();
+
         try (
-                var is = new URL("https://raw.githubusercontent.com/DiveZone/ExampleReactiveLibraries/master/airlines.dat")
-                        .openConnection()
-                        .getInputStream();
+                var is = this.getClass().getClassLoader().getResourceAsStream("airlines.dat");
                 var reader = new BufferedReader(new InputStreamReader(is))
         ) {
 
-            var bootstrapSchema = CsvSchema.builder()
-                    .addColumn("id", CsvSchema.ColumnType.NUMBER)
-                    .addColumn("name", CsvSchema.ColumnType.STRING)
-                    .addColumn("alias", CsvSchema.ColumnType.STRING)
-                    .addColumn("iata", CsvSchema.ColumnType.STRING)
-                    .addColumn("icao", CsvSchema.ColumnType.STRING)
-                    .addColumn("callsign", CsvSchema.ColumnType.STRING)
-                    .addColumn("country", CsvSchema.ColumnType.STRING)
-                    .addColumn("active", CsvSchema.ColumnType.STRING)
-                    .build()
-                    .withoutHeader();
-
-            final MappingIterator<Airline> readValues = new CsvMapper().readerFor(Airline.class).with(bootstrapSchema)
+            final MappingIterator<Airline> readValues = new CsvMapper()
+                    .readerFor(Airline.class)
+                    .with(bootstrapSchema)
                     .readValues(reader);
 
             readValues.readAll().stream()
