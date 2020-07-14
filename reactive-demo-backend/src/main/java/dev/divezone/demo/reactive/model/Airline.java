@@ -1,4 +1,4 @@
-package com.example.reactive.demo.model;
+package dev.divezone.demo.reactive.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

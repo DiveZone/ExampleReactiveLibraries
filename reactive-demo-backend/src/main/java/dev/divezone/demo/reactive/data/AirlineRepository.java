@@ -1,9 +1,9 @@
-package com.example.reactive.demo.data;
+package dev.divezone.demo.reactive.data;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.example.reactive.demo.model.Airline;
+import dev.divezone.demo.reactive.model.Airline;
 
 import org.springframework.data.repository.Repository;
 

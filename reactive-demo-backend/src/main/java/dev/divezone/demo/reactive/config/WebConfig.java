@@ -1,7 +1,7 @@
-package com.example.reactive.demo.config;
+package dev.divezone.demo.reactive.config;
 
-import com.example.reactive.demo.setup.Setup;
-import com.example.reactive.demo.web.AirlineController;
+import dev.divezone.demo.reactive.setup.Setup;
+import dev.divezone.demo.reactive.web.AirlineController;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

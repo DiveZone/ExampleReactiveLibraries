@@ -1,11 +1,11 @@
-package com.example.reactive.demo.web;
+package dev.divezone.demo.reactive.web;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import java.util.List;
 
-import com.example.reactive.demo.data.AirlineRepository;
-import com.example.reactive.demo.model.Airline;
+import dev.divezone.demo.reactive.data.AirlineRepository;
+import dev.divezone.demo.reactive.model.Airline;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;

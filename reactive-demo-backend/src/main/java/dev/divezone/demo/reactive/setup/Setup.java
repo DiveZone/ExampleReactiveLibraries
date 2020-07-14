@@ -1,4 +1,4 @@
-package com.example.reactive.demo.setup;
+package dev.divezone.demo.reactive.setup;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,8 +6,8 @@ import java.io.InputStreamReader;
 
 import javax.annotation.PostConstruct;
 
-import com.example.reactive.demo.data.AirlineRepository;
-import com.example.reactive.demo.model.Airline;
+import dev.divezone.demo.reactive.data.AirlineRepository;
+import dev.divezone.demo.reactive.model.Airline;
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;

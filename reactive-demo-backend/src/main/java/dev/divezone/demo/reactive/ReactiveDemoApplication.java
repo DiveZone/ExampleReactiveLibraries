@@ -1,4 +1,4 @@
-package com.example.reactive.demo;
+package dev.divezone.demo.reactive;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

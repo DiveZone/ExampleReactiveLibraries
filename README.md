@@ -28,4 +28,3 @@ CTRL+C to stop the backend server.
 #### Requirements for running backend:
 - Java 11 or higher
 - Maven 3.5 or higher
-- Internet connection

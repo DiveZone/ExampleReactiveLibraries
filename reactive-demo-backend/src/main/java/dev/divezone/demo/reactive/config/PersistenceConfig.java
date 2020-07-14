@@ -1,7 +1,7 @@
-package com.example.reactive.demo.config;
+package dev.divezone.demo.reactive.config;
 
-import com.example.reactive.demo.data.AirlineRepository;
-import com.example.reactive.demo.model.Airline;
+import dev.divezone.demo.reactive.data.AirlineRepository;
+import dev.divezone.demo.reactive.model.Airline;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Configuration;

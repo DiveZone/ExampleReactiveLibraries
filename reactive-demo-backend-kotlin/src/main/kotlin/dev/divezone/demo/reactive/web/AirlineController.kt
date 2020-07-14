@@ -21,7 +21,7 @@ class AirlineController(val repository: AirlineRepository) {
     fun setFavorite(
             @PathVariable id: Int,
             @PathVariable favorite: Boolean
-    ): Airline? = repository.findByIdOrNull(id)?.let {
+    ) = repository.findByIdOrNull(id)?.let {
         it.favorite = favorite
         repository.save(it)
         it
