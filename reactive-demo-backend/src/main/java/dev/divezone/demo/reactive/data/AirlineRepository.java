@@ -1,18 +1,13 @@
 package dev.divezone.demo.reactive.data;
 
 import java.util.List;
-import java.util.Optional;
+
+import org.springframework.data.repository.CrudRepository;
 
 import dev.divezone.demo.reactive.model.Airline;
 
-import org.springframework.data.repository.Repository;
-
-public interface AirlineRepository extends Repository<Airline, Integer> {
-
-    Optional<Airline> findById(Integer id);
+public interface AirlineRepository extends CrudRepository<Airline, Integer> {
 
     List<Airline> findAirlineByCountry(String country);
-
-    void save(Airline entity);
 
 }

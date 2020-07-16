@@ -1,8 +1,10 @@
-package dev.divezone.demo.reactive.setup;
+package dev.divezone.demo.reactive.flux.setup;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.Duration;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 
@@ -11,14 +13,16 @@ import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
-import dev.divezone.demo.reactive.data.AirlineRepository;
-import dev.divezone.demo.reactive.model.Airline;
+import dev.divezone.demo.reactive.flux.data.AirlineRepository;
+import dev.divezone.demo.reactive.flux.model.Airline;
 import lombok.AllArgsConstructor;
 
 @Component
 @AllArgsConstructor
+@DependsOn("initializer")
 public class Setup {
 
     private final AirlineRepository repository;
@@ -47,13 +51,16 @@ public class Setup {
                     .with(bootstrapSchema)
                     .readValues(reader);
 
-            readValues.readAll().stream()
-                    .filter(airline -> airline.getActive().equals("Y"))
-                    .forEach(airline -> {
-                        airline.setIata(StringUtils.strip(airline.getIata(), "'\\"));
-                        airline.setIcao(StringUtils.strip(airline.getIcao(), "'\\"));
-                        repository.save(airline);
-                    });
+            repository.saveAll(
+                    readValues.readAll().stream()
+                            .filter(airline -> airline.getActive().equals("Y"))
+                            .peek(airline -> {
+                                airline.setId(null);
+                                airline.setIata(StringUtils.strip(airline.getIata(), "'\\"));
+                                airline.setIcao(StringUtils.strip(airline.getIcao(), "'\\"));
+                            })
+                            .collect(Collectors.toList())
+            ).blockLast(Duration.ofSeconds(10));
 
         } catch (final IOException e) {
             e.printStackTrace();
@@ -61,3 +68,4 @@ public class Setup {
 
     }
 }
+

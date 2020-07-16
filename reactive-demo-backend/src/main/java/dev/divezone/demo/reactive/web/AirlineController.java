@@ -4,24 +4,20 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import java.util.List;
 
-import dev.divezone.demo.reactive.data.AirlineRepository;
-import dev.divezone.demo.reactive.model.Airline;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import dev.divezone.demo.reactive.data.AirlineRepository;
+import dev.divezone.demo.reactive.model.Airline;
+import lombok.AllArgsConstructor;
+
 @RestController
 @RequestMapping(value = "/api/airline", produces = "application/json")
+@AllArgsConstructor
 public class AirlineController {
 
     private final AirlineRepository repository;
-
-    @Autowired
-    public AirlineController(final AirlineRepository repository) {
-        this.repository = repository;
-    }
 
     @RequestMapping(value = "/{country}", method = GET)
     public List<Airline> getForCountry(
