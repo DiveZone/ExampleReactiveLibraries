@@ -8,8 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//@Entity
-//@Table(name = "AIRLINE")
 @Table("airline")
 @Data
 @AllArgsConstructor

@@ -34,5 +34,5 @@ class Airline(
     var active: String? = null,
 
     @Column(name = "FAVORITE")
-    var favorite:Boolean = false
+    var favorite: Boolean = false
 )

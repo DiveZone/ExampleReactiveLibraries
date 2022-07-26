@@ -1,7 +1,6 @@
 package dev.divezone.demo.reactive.web
 
 import dev.divezone.demo.reactive.data.AirlineRepository
-import dev.divezone.demo.reactive.model.Airline
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping

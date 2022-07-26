@@ -15,31 +15,31 @@ class Setup(val repository: AirlineRepository) {
     init {
 
         val bootstrapSchema = CsvSchema.builder()
-                .addColumn("id", CsvSchema.ColumnType.NUMBER)
-                .addColumn("name", CsvSchema.ColumnType.STRING)
-                .addColumn("alias", CsvSchema.ColumnType.STRING)
-                .addColumn("iata", CsvSchema.ColumnType.STRING)
-                .addColumn("icao", CsvSchema.ColumnType.STRING)
-                .addColumn("callsign", CsvSchema.ColumnType.STRING)
-                .addColumn("country", CsvSchema.ColumnType.STRING)
-                .addColumn("active", CsvSchema.ColumnType.STRING)
-                .build()
-                .withoutHeader()
+            .addColumn("id", CsvSchema.ColumnType.NUMBER)
+            .addColumn("name", CsvSchema.ColumnType.STRING)
+            .addColumn("alias", CsvSchema.ColumnType.STRING)
+            .addColumn("iata", CsvSchema.ColumnType.STRING)
+            .addColumn("icao", CsvSchema.ColumnType.STRING)
+            .addColumn("callsign", CsvSchema.ColumnType.STRING)
+            .addColumn("country", CsvSchema.ColumnType.STRING)
+            .addColumn("active", CsvSchema.ColumnType.STRING)
+            .build()
+            .withoutHeader()
 
         this::class.java.classLoader.getResourceAsStream("airlines.dat")?.use { stream ->
             stream.reader().use { reader ->
                 val readValues: MappingIterator<Airline> = CsvMapper()
-                        .readerFor(Airline::class.java)
-                        .with(bootstrapSchema)
-                        .readValues(reader)
+                    .readerFor(Airline::class.java)
+                    .with(bootstrapSchema)
+                    .readValues(reader)
 
                 readValues.asSequence()
-                        .filter { it.active.equals("Y") }
-                        .forEach {
-                            it.iata = it.iata?.trim('\\', '\'')
-                            it.icao = it.icao?.trim('\\', '\'')
-                            repository.save(it)
-                        }
+                    .filter { it.active.equals("Y") }
+                    .forEach {
+                        it.iata = it.iata?.trim('\\', '\'')
+                        it.icao = it.icao?.trim('\\', '\'')
+                        repository.save(it)
+                    }
             }
         }
     }

@@ -15,5 +15,4 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
         basePackageClasses = Airline.class
 )
 public class PersistenceConfig {
-
 }
