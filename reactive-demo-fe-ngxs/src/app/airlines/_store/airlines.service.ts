@@ -1,10 +1,8 @@
-
-import {throwError as observableThrowError,  Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs/operators';
-import { Airline } from './airlines.model';
-
+import {Observable, throwError} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {catchError} from 'rxjs/operators';
+import {Airline} from './airlines.model';
 
 @Injectable()
 export class AirlinesService {
@@ -18,7 +16,7 @@ export class AirlinesService {
         `/api/airline/${country}`
       )
       .pipe(
-        catchError((err: Response) => observableThrowError(err.json()))
+        catchError((err: Response) => throwError(() => new Error(err.statusText)))
       );
   }
 

@@ -3,11 +3,13 @@ import { tap } from 'rxjs/operators';
 import { Favorize, Favorized, Query } from './airlines.actions';
 import { Airline } from './airlines.model';
 import { AirlinesService } from './airlines.service';
+import {Injectable} from '@angular/core';
 
 @State<Airline[]>({
   name: 'airlines',
   defaults: []
 })
+@Injectable()
 export class AirlinesState {
 
   constructor(private _service: AirlinesService) {

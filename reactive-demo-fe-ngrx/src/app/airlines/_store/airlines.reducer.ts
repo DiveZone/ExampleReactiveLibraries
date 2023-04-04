@@ -14,7 +14,7 @@ export function airlinesReducer(state: State = initialState,
                                 action: AirlineActions) {
   switch (action.type) {
     case AirlineActionTypes.LOADED:
-      return airlinesAdapter.addAll((action as Loaded).payload, state);
+      return airlinesAdapter.setAll((action as Loaded).payload, state);
     case AirlineActionTypes.FAVORIZED:
       return airlinesAdapter.updateOne({id: (action as Favorized).payload.id, changes: action.payload}, state);
     default:
