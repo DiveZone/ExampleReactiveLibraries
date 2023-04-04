@@ -1,16 +1,18 @@
-import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-import { take, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { Airline } from '../airlines.model';
-import { AirlinesService } from '../airlines.service';
+import {AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
+import {take, takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {Airline} from '../airlines.model';
+import {AirlinesService} from '../airlines.service';
+import {UntilDestroy} from "@ngneat/until-destroy";
 
+@UntilDestroy()
 @Component({
   selector: 'demo-airlines-list',
   templateUrl: './airlines-list.component.html'
 })
-export class AirlinesListComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
+export class AirlinesListComponent implements OnInit, AfterViewInit, OnChanges {
 
   displayedColumns = ['favorite', 'id', 'name', 'iata', 'icao', 'callsign'];
 
@@ -18,9 +20,7 @@ export class AirlinesListComponent implements OnInit, AfterViewInit, OnDestroy, 
 
   @Input() country: string;
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-
-  private disconnect$ = new Subject();
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(private _service: AirlinesService) {
   }
@@ -34,24 +34,18 @@ export class AirlinesListComponent implements OnInit, AfterViewInit, OnDestroy, 
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.disconnect$.next();
     this.updateList();
-  }
-
-  ngOnDestroy() {
-    this.disconnect$.next();
-    this.disconnect$.complete();
   }
 
   private updateList() {
     this._service.getAirlineList(this.country)
-      .pipe(takeUntil(this.disconnect$))
-      .subscribe(
-        airlines => {
-          this.dataSource.data = airlines;
-        },
-        () => {
-          this.dataSource.data = [];
+      .subscribe({
+          next: (airlines) => {
+            this.dataSource.data = airlines;
+          },
+          error: () => {
+            this.dataSource.data = [];
+          }
         }
       );
   }

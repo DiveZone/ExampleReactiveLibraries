@@ -4,13 +4,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import javax.annotation.PostConstruct;
-
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import dev.divezone.demo.reactive.data.AirlineRepository;
@@ -23,8 +23,8 @@ public class Setup {
 
     private final AirlineRepository repository;
 
-    @PostConstruct
-    private void loadData() {
+    @EventListener(ApplicationReadyEvent.class)
+    public void loadData() {
         var bootstrapSchema = CsvSchema.builder()
                 .addColumn("id", CsvSchema.ColumnType.NUMBER)
                 .addColumn("name", CsvSchema.ColumnType.STRING)
