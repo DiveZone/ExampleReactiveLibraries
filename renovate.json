@@ -3,9 +3,11 @@
   "extends": [
     "config:base"
   ],
+  "platformAutomerge": true,
   "packageRules": [
     {
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "description": "Automerge non-major updates",
+      "matchUpdateTypes": ["minor", "patch"],
       "automerge": true
     }
   ]
