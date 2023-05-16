@@ -1,8 +1,7 @@
-import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
 import { Airline } from '../_store/airlines.model';
 import { AirlinesService } from '../_store/airlines.service';
 
@@ -10,7 +9,7 @@ import { AirlinesService } from '../_store/airlines.service';
   selector: 'demo-airlines-list',
   templateUrl: './airlines-list.component.html'
 })
-export class AirlinesListComponent implements AfterViewInit, OnDestroy {
+export class AirlinesListComponent implements AfterViewInit {
 
   displayedColumns = ['favorite', 'id', 'name', 'iata', 'icao', 'callsign'];
 
@@ -18,21 +17,22 @@ export class AirlinesListComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  private disconnect$ = new Subject();
-
   constructor(private _service: AirlinesService) {
     this._service.airlines$
-      .pipe(takeUntil(this.disconnect$))
-      .subscribe(data => this.dataSource.data = data);
+      .pipe(takeUntilDestroyed())
+      .subscribe({
+        next: (airlines) => {
+          this.dataSource.data = airlines;
+        },
+        error: () => {
+          this.dataSource.data = [];
+        }
+      }
+      );
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-  }
-
-  ngOnDestroy() {
-    this.disconnect$.next();
-    this.disconnect$.complete();
   }
 
   updateFavorite(id: number, favorite: boolean) {
