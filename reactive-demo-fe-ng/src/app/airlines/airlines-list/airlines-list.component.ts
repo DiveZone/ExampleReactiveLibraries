@@ -45,8 +45,7 @@ export class AirlinesListComponent implements OnInit, AfterViewInit, OnChanges {
         error: () => {
           this.dataSource.data = [];
         }
-      }
-      );
+      });
   }
 
   updateFavorite(id: number, favorite: boolean) {
