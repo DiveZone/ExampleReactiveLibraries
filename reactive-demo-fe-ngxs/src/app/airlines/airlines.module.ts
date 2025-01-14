@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -14,14 +14,11 @@ import { AirlinesComponent } from './airlines.component';
 import { AirlinesService } from './_store/airlines.service';
 
 @NgModule({
-    declarations: [
-        AirlinesComponent,
-        AirlinesListComponent
-    ],
-    imports: [
+    exports: [
+        AirlinesComponent
+    ], imports: [
         // ANGULAR
         CommonModule,
-        HttpClientModule,
         // MATERIAL
         MatButtonModule,
         MatButtonToggleModule,
@@ -30,15 +27,13 @@ import { AirlinesService } from './_store/airlines.service';
         MatSelectModule,
         MatTableModule,
         // NGXS
-        NgxsModule.forFeature([AirlinesState])
-    ],
-    providers: [
-        AirlinesService
-    ],
-    exports: [
-        AirlinesComponent
-    ]
-})
+        NgxsModule.forFeature([AirlinesState]),
+        AirlinesComponent,
+        AirlinesListComponent
+    ], providers: [
+        AirlinesService,
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AirlinesModule {
 
 }

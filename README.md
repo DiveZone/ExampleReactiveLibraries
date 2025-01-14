@@ -26,5 +26,5 @@ CTRL+C to stop the backend server.
 **please note**: Only start one at the time, they are both using port 8080.
 
 #### Requirements for running backend:
-- Java 11 or higher
+- Java 21 or higher
 - Maven 3.5 or higher

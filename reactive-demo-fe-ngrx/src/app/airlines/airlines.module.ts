@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -16,32 +16,27 @@ import { airlinesReducer } from './_store/airlines.reducer';
 import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
-  declarations: [
-    AirlinesComponent,
-    AirlinesListComponent
-  ],
-  imports: [
-    // ANGULAR
-    CommonModule,
-    HttpClientModule,
-    // MATERIAL
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatIconModule,
-    MatPaginatorModule,
-    MatSelectModule,
-    MatTableModule,
-    // NGRX
-    StoreModule.forFeature('airlines', airlinesReducer),
-    EffectsModule.forFeature([AirlinesEffects])
-  ],
-  providers: [
-    AirlinesService
-  ],
-  exports: [
-    AirlinesComponent
-  ]
-})
+    exports: [
+        AirlinesComponent
+    ], imports: [
+        // ANGULAR
+        CommonModule,
+        // MATERIAL
+        MatButtonModule,
+        MatButtonToggleModule,
+        MatIconModule,
+        MatPaginatorModule,
+        MatSelectModule,
+        MatTableModule,
+        // NGRX
+        StoreModule.forFeature('airlines', airlinesReducer),
+        EffectsModule.forFeature([AirlinesEffects]),
+        AirlinesComponent,
+        AirlinesListComponent
+    ], providers: [
+        AirlinesService,
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AirlinesModule {
 
 }
